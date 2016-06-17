@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     else
       rev_key = ActiveRecord::Base.connection.execute("SELECT value FROM ember_corvae_bootstrap WHERE key='current'").first['value']
       html = ActiveRecord::Base.connection.execute("SELECT value FROM ember_corvae_bootstrap WHERE key=#{ActiveRecord::Base.sanitize(rev_key)}").first['value']
-      render html: thml.html_safe and return
+      render html: html.html_safe and return
     end
   end
 
