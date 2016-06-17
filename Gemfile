@@ -49,5 +49,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'devise', '~> 4.0.3'
-gem 'devise_token_auth', '~> 0.1.37'
+gem 'devise_token_auth', github:"lynndylanhurley/devise_token_auth", branch: "master" # temp until issue 
 gem 'omniauth', '~> 1.3.1'
