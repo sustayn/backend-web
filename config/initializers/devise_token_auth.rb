@@ -34,6 +34,11 @@ DeviseTokenAuth.setup do |config|
   # If, however, you wish to integrate with legacy Devise authentication, you can
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # enable_standard_devise_support = false
-  config.default_confirm_success_url = 'http://localhost:4200'
-  config.default_password_reset_url = 'http://localhost:4200/users/settings'
+  if Rails.env.production?
+    config.default_confirm_success_url = 'http://corvae-backend-env.us-west-2.elasticbeanstalk.com/'
+    config.default_password_reset_url = 'http://corvae-backend-env.us-west-2.elasticbeanstalk.com/users/settings'
+  else
+    config.default_confirm_success_url = 'http://localhost:4200'
+    config.default_password_reset_url = 'http://localhost:4200/users/settings'
+  end
 end
