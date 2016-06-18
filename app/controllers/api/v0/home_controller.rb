@@ -18,7 +18,7 @@ class API::V0::HomeController < ApplicationController
         key :description, 'The type of request'
         key :required, false
         key :type, :string
-      end0
+      end
       parameter do
         key :name, :email
         key :in, :body
