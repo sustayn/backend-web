@@ -1,7 +1,7 @@
 class SuccessResponse
   include Swagger::Blocks
 
-  swagger_schema :SuccessResponse do
+  swagger_schema :SuccessResponse do #collapse_start
     key :required, :meta
     property :meta do
       key :type, :object
@@ -11,5 +11,5 @@ class SuccessResponse
         key :type, :string
       end
     end
-  end
+  end #collapse_end
 end

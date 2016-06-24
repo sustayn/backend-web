@@ -1,9 +1,9 @@
 class API::V0::EcgStreamsController < ApplicationController
   include Swagger::Blocks
 
-  before_action :authenticate_user!, only: [:log_stream]
+  before_action :authenticate_api_user!, only: [:log_stream]
 
-  swagger_path '/ecg_streams/log_stream' do #swagger_start
+  swagger_path '/ecg_streams/log_stream' do #collapse_start
     operation :patch do
       key :description, 'Patch data to the current users ecg stream.
                          New data posted will be appended based on the timestamps provided'
@@ -54,18 +54,20 @@ class API::V0::EcgStreamsController < ApplicationController
         end
       end
     end
-  end #swagger_end
+  end #collapse_end
   def log_stream
     segment_data = ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:segment, :segment_start, :segment_end])
     render_404 and return if segment_data[:segment].blank?
 
-    @ecg_stream = current_user.get_or_create_stream
+    @ecg_stream = current_api_user.get_or_create_stream
 
-    if @ecg_stream.append_to_stream(segment_data[:segment], segment_data[:segment_end])
-      binding.pry
-      render json: @ecg_stream, serializer: API::V0::EcgStreamSerializer
+    # Detect stream errors and create potential stream alerts
+    @ecg_stream.detect_segment_errors(segment_data[:segment], Time.parse(segment_data[:segment_start]), Time.parse(segment_data[:segment_end]))
+
+    if @ecg_stream.append_to_stream(segment_data[:segment], Time.parse(segment_data[:segment_start]), Time.parse(segment_data[:segment_end]))
+      render json: @ecg_stream, serializer: API::V0::EcgStreamSerializer, include: params[:include]
     else
-      binding.pry
+      render_500('Error appending data', 'The server was unable to properly append new data to the ecg stream')
     end
   end
 end

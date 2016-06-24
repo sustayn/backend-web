@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Swagger::Blocks
 
-  swagger_schema :User do
+  swagger_schema :User do #collapse_start
     key :required, [:id, :email, :encrypted_password]
     property :id do
       key :type, :integer
@@ -27,14 +27,14 @@ class User < ActiveRecord::Base
     property :updated_at do
       key :type, :datetime
     end
-  end
+  end #collapse_end
 
   has_one :ecg_stream, dependent: :destroy
 
   def get_or_create_stream
-    @ecg_stream = ecg_stream || EcgStream.create(user_id: current_user.id,
+    @ecg_stream = ecg_stream || EcgStream.create(user_id: id,
                                                  signal: [],
-                                                 start_time: DateTime.now,
-                                                 end_time: DateTime.now)
+                                                 start_time: Time.now,
+                                                 end_time: Time.now)
   end
 end

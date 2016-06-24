@@ -1,7 +1,7 @@
 class API::V0::HomeController < ApplicationController
   include Swagger::Blocks
 
-  swagger_path '/contact' do #swagger_start
+  swagger_path '/contact' do #collapse_start
     operation :post do
       key :description, 'Sends a message to the contact account'
       key :tags, ['Home']
@@ -46,7 +46,7 @@ class API::V0::HomeController < ApplicationController
         end
       end
     end
-  end #swagger_end
+  end #collapse_end
   def contact
     name = params[:name] || 'Anonymous'
     subject = params[:contact_type] || 'No Subject'

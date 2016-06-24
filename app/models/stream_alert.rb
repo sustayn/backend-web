@@ -1,7 +1,7 @@
 class StreamAlert < ApplicationRecord
   include Swagger::Blocks
 
-  swagger_schema :StreamAlert do
+  swagger_schema :StreamAlert do #collapse_start
     key :required, [:id, :signal, :start_time, :end_time, :ecg_stream_id]
     property :id do
       key :type, :integer
@@ -32,7 +32,7 @@ class StreamAlert < ApplicationRecord
     property :updated_at do
       key :type, :string
     end
-  end
+  end #collapse_end
 
   belongs_to :ecg_stream
 end

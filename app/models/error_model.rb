@@ -1,7 +1,7 @@
 class ErrorModel
   include Swagger::Blocks
 
-  swagger_schema :ErrorModel do
+  swagger_schema :ErrorModel do #collapse_start
     property :errors do
       key :type, :array
       key :required, true
@@ -23,5 +23,5 @@ class ErrorModel
         end
       end
     end
-  end
+  end #collapse_end
 end
