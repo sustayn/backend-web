@@ -1,4 +1,4 @@
-class API::V0::EcgStreamsController < ApplicationController
+class API::V0::EcgStreamsController < API::V0::APIController
   include Swagger::Blocks
 
   before_action :authenticate_api_user!, only: [:log_stream]

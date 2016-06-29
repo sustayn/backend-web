@@ -1,4 +1,4 @@
-class API::V0::UsersController < ApplicationController
+class API::V0::UsersController < API::V0::APIController
   include Swagger::Blocks
 
   before_action :authenticate_api_user!, only: [:ecg_stream]

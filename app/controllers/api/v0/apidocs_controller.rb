@@ -1,4 +1,4 @@
-class API::V0::ApidocsController < ApplicationController
+class API::V0::ApidocsController < API::V0::APIController
   include Swagger::Blocks
 
   before_action :cors_preflight_check

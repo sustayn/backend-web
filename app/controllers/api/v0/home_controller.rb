@@ -1,4 +1,4 @@
-class API::V0::HomeController < ApplicationController
+class API::V0::HomeController < API::V0::APIController
   include Swagger::Blocks
 
   swagger_path '/contact' do #collapse_start
