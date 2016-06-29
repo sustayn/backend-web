@@ -169,8 +169,8 @@ class EcgStream < ApplicationRecord
       end
     end
 
-    max_distance = distances.max_by { |obj| obj[:distance] }[:distance]
-    min_distance = distances.min_by { |obj| obj[:distance] }[:distance]
+    max_distance = distances.present? ? distances.max_by { |obj| obj[:distance] }[:distance] : 0
+    min_distance = distances.present? ? distances.min_by { |obj| obj[:distance] }[:distance] : 0
     long_distances = Array.new
     if max_distance - min_distance > 75
       long_distances = distances.select { |obj| obj[:distance] > max_distance-25 }
