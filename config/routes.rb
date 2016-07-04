@@ -21,6 +21,12 @@ Rails.application.routes.draw do
           patch '/log_stream', to: 'ecg_streams#log_stream'
         end
       end
+
+      resources :stream_alerts, only: [:index] do
+
+      end
     end
   end
+
+  get '*path', to: 'home#index'
 end
