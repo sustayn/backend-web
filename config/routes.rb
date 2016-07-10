@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "home#index"
 
+  get '/ping', to: 'home#ping'
+
   namespace :api do
     mount_devise_token_auth_for 'User', at: '/v0/auth'
 
@@ -8,7 +10,6 @@ Rails.application.routes.draw do
       resources :apidocs, only: [:index]
 
       ######### Home Routes #############
-      post '/contact', to: 'home#contact'
 
       resources :users, only: [:show] do
         collection do

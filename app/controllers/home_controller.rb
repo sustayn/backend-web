@@ -13,6 +13,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def ping
+    render json: { message: 'pong' }
+  end
+
   private
 
   def process_index_dev(index_string)
